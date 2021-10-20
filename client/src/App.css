@@ -1,0 +1,34 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.usersContainer{
+  height: 400px;
+  overflow: auto;
+}
+.user{
+  background: #eff0ef;
+  transition: all 0.2s ease-in;
+}
+.user:hover{
+  cursor: pointer;
+  background:#dddede;
+}
+.you{
+  background: #dbfdde;
+}
+.you:hover{
+  background: #bcfcc1;
+}
+.popupContainer{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}

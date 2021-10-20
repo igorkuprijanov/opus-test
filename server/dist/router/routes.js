@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_controller_1 = require("../controllers/user-controller");
+const body_parser_1 = __importDefault(require("body-parser"));
+const express_validator_1 = require("express-validator");
+const auth_middleware_1 = require("../middlewares/auth-middleware");
+let jsonParser = body_parser_1.default.json();
+let router = (0, express_1.Router)();
+router.post('/registration', jsonParser, (0, express_validator_1.body)('email').isEmail(), (0, express_validator_1.body)('password').isLength({ min: 8, max: 32 }), user_controller_1.UserController.registration);
+router.post('/login', jsonParser, (0, express_validator_1.body)('email').isEmail(), (0, express_validator_1.body)('password').isLength({ min: 8, max: 32 }), user_controller_1.UserController.login);
+router.post('/restore', jsonParser, (0, express_validator_1.body)('email').isEmail(), user_controller_1.UserController.restore);
+router.post('/logout', jsonParser, user_controller_1.UserController.logOut);
+router.post('/refresh', jsonParser, user_controller_1.UserController.refresh);
+router.post('/addUser', jsonParser, auth_middleware_1.AuthMiddleware.handleAuth, (0, express_validator_1.body)('email').isEmail(), (0, express_validator_1.body)('password').isLength({ min: 8, max: 32 }), user_controller_1.UserController.registration);
+router.get('/activate/:link', jsonParser, user_controller_1.UserController.activate);
+router.get('/users', auth_middleware_1.AuthMiddleware.handleAuth, jsonParser, user_controller_1.UserController.getUsers);
+router.delete('/delete', auth_middleware_1.AuthMiddleware.handleAuth, jsonParser, user_controller_1.UserController.deleteUser);
+exports.default = router;
