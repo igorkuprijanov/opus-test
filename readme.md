@@ -100,23 +100,35 @@ let refreshToken = jwt.sign({payload}, process.env.JWT_REFRESH_SECRET as string,
 All API endpoints go through router in ./router/router.ts
 
 ``/registration`` - register new user
+
 ``/login`` - login into an account and issue JWT
+
 ``/restore`` - restore users password
+
 ``/logout`` - log out of an account and remove JWT
+
 ``/refresh`` - refresh JWT with refreshToken, happens automaticly if accessToken expires and refreshToken is present
+
 ``/addUser`` - register new user through user interface - **requiers user to be authorized**
+
 ``/acitvate/:link`` - activate a user through the link sent by email
+
 ``/users`` - get all users - **requiers user to be authorized**
+
 ``/delete`` - delete user through user interface - **requiers user to be authorized**
+
 
 ### _Running the server_
 **By default client runs on http://localhost:4000** and to for the server to run correctly two variables in [.env](./server/.env) file must be changed
+
 ``
 SMTP_USER = "youEmail@gmail.com"
 ``
+
 ``
 SMTP_USER = "yourEmailPassword"
 ``
+
 Nodemailer is configured to use Gmail, so if you are useing some other email service make sure to change it accordingly in [email-services.ts](./server/services/email-services.ts)
 **Make sure that POP/IMAP forwarding is allowed on your email account**
 
